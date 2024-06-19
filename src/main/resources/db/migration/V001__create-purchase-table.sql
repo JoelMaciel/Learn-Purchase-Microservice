@@ -1,0 +1,8 @@
+CREATE TABLE PURCHASE (
+    purchase_id UUID PRIMARY KEY DEFAULT gen_random_uuid() ,
+    user_id UUID NOT NULL,
+    course_id UUID NOT NULL ,
+    title VARCHAR(50) NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    order_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
