@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: purchase-service
+    name: learn-purchase-service
   datasource:
     url: jdbc:postgresql://localhost:5435/purchase
     username: joel
@@ -28,4 +28,11 @@ logging:
     root: INFO
     org.springframework.web: DEBUG
     org.hibernate: INFO
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
 
