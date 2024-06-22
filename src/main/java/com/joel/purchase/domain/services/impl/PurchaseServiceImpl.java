@@ -1,7 +1,9 @@
 package com.joel.purchase.domain.services.impl;
 
+import com.joel.purchase.api.security.AuthenticationCurrentUserService;
 import com.joel.purchase.domain.dtos.PurchaseDTO;
 import com.joel.purchase.domain.dtos.PurchaseRequestDTO;
+import com.joel.purchase.domain.excptions.UserDoesNotHavePermissionException;
 import com.joel.purchase.domain.models.Purchase;
 import com.joel.purchase.domain.repositories.PurchaseRepository;
 import com.joel.purchase.domain.services.PurchaseService;
@@ -20,11 +22,17 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     private final PurchaseRepository purchaseRepository;
     private final PurchaseConverter purchaseConverter;
+    private final AuthenticationCurrentUserService authenticationCurrentUserService;
 
     @Override
     public Page<PurchaseDTO> findAllPurchaseOfUser(UUID userId, Pageable pageable) {
-        Page<Purchase> purchases = purchaseRepository.findAllByUserId(userId, pageable);
-        return purchaseConverter.purchaseDTOPage(purchases);
+        UUID currentUserid = authenticationCurrentUserService.getCurrentUser().getUserId();
+        if (currentUserid.equals(userId)) {
+            Page<Purchase> purchases = purchaseRepository.findAllByUserId(userId, pageable);
+            return purchaseConverter.purchaseDTOPage(purchases);
+        } else {
+            throw new UserDoesNotHavePermissionException("Forbidden");
+        }
     }
 
     @Transactional
