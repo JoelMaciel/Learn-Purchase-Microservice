@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Component
 public class PurchaseConverter {
@@ -22,7 +23,7 @@ public class PurchaseConverter {
                 .courseId(purchase.getCourseId())
                 .title(purchase.getTitle())
                 .price(purchase.getPrice())
-                .orderDate(LocalDateTime.now())
+                .orderDate(OffsetDateTime.now())
                 .build();
     }
 
@@ -32,7 +33,7 @@ public class PurchaseConverter {
                 .courseId(purchaseRequestDTO.getCourseId())
                 .title(purchaseRequestDTO.getTitle())
                 .price(purchaseRequestDTO.getPrice())
-                .orderDate(LocalDateTime.now())
+                .orderDate(OffsetDateTime.now())
                 .build();
     }
 }

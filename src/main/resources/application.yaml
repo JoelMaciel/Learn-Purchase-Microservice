@@ -21,6 +21,11 @@ spring:
   flyway:
     locations: classpath:db/migration, classpath:db/testdb
     baselineOnMigrate: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 logging:
   level:
@@ -36,6 +41,14 @@ learn:
   auth:
     jwtSecret: ${JWT_SECRET}
     jwtExpirationMs: 14400000
+  broker:
+    exchange:
+      purchaseCommandExchange: learn.purchaseCommand
+    queue:
+      purchaseCommandQueue:
+        name: learn.purchaseCommand.ms.purchase
+    key:
+      purchaseCommandKey: ms.purchase
 
 eureka:
   client:

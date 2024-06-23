@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
@@ -27,5 +27,5 @@ public class Purchase {
     private UUID courseId;
     private String title;
     private Double price;
-    private LocalDateTime orderDate;
+    private OffsetDateTime orderDate;
 }
